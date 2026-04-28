@@ -7,10 +7,10 @@
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?logo=flutter)](https://flutter.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Platform](https://img.shields.io/badge/Platform-Android-brightgreen?logo=android)](https://github.com/beratturkey1/fuel_tr/releases)
+[![Platform](https://img.shields.io/badge/Platform-Android-brightgreen?logo=android)](https://github.com/BeratARPA/fuel_tr/releases)
 [![Data](https://img.shields.io/badge/Data-EPDK%20Official-blue)](https://www.epdk.gov.tr)
 
-[📥 Download APK](https://github.com/beratturkey1/fuel_tr/releases/latest) · [🐛 Report Bug](https://github.com/beratturkey1/fuel_tr/issues) · [💡 Request Feature](https://github.com/beratturkey1/fuel_tr/issues)
+[📥 Download APK](https://github.com/BeratARPA/fuel_tr/releases/latest) · [🐛 Report Bug](https://github.com/BeratARPA/fuel_tr/issues) · [💡 Request Feature](https://github.com/BeratARPA/fuel_tr/issues)
 
 </div>
 
@@ -102,7 +102,7 @@
 ## 📥 Installation
 
 ### Option 1 — Download APK (Recommended)
-1. Go to [**Releases**](https://github.com/beratturkey1/fuel_tr/releases/latest)
+1. Go to [**Releases**](https://github.com/BeratARPA/fuel_tr/releases/latest)
 2. Download `yakitcep-vX.X.X.apk`
 3. Enable "Install from unknown sources" on your Android device
 4. Install and enjoy!
@@ -115,7 +115,7 @@
 
 ```bash
 # Clone the repo
-git clone https://github.com/beratturkey1/fuel_tr.git
+git clone https://github.com/BeratARPA/fuel_tr.git
 cd fuel_tr
 
 # Install dependencies
@@ -150,7 +150,7 @@ This project is licensed under the **MIT License** — see [LICENSE](LICENSE) fo
 
 ## 👨‍💻 Author
 
-**Berat** — [@beratturkey1](https://github.com/beratturkey1)
+**Berat** — [@BeratARPA](https://github.com/BeratARPA)
 
 ---
 
