@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="widget_bg_color">#121212</color>
+    <color name="widget_card_bg">#1E1E1E</color>
+    <color name="widget_text_primary">#E0E0E0</color>
+    <color name="widget_text_secondary">#9E9E9E</color>
+
+    <!-- Fuel Colors (Slightly lighter for dark mode visibility, matching seed colors) -->
+    <color name="widget_benzin">#FFB74D</color> <!-- Orange 300 -->
+    <color name="widget_motorin">#64B5F6</color> <!-- Blue 300 -->
+    <color name="widget_lpg">#BA68C8</color> <!-- Purple 300 -->
+
+    <color name="widget_arrow_up">#EF5350</color> <!-- Red 400 -->
+    <color name="widget_arrow_down">#66BB6A</color> <!-- Green 400 -->
+    <color name="widget_arrow_neutral">#78909C</color> <!-- Blue Grey 400 -->
+</resources>

@@ -1,0 +1,9 @@
+# Copy this file to local.properties and fill in your values.
+# local.properties is gitignored — never commit it.
+
+sdk.dir=/path/to/your/Android/sdk
+flutter.sdk=/path/to/your/flutter
+
+# AdMob Application ID — https://admob.google.com
+# If left unset, the Google test App ID is used automatically (debug/testing only).
+admob.appId=ca-app-pub-XXXXXXXXXXXXXXXX~XXXXXXXXXX

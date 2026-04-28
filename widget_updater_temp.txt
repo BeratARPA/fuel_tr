@@ -1,0 +1,16 @@
+
+  /// Arkaplanda (veya refresh butonuna tÄ±klandÄ±ÄŸÄ±nda) tÃ¼m kurguyu toparlayarak widget'Ä± gÃ¼nceller
+  static Future<void> fetchAndUpdateDataFromBackground() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.reload(); // ÖNEMLİ: Arka plan izolelerinde güncel veriyi okumak için zorla yenile
+      final favorilerList = prefs.getStringList('favori_iller');
+      final defaultIlKodu = prefs.getString('pref_varsayilan_il') ?? '06';
+      
+      List<String> illerAsList = [];
+      if (favorilerList != null && favorilerList.isNotEmpty) {
+        illerAsList = favorilerList.take(5).toList();
+      } else {
+        illerAsList = [defaultIlKodu];
+      }
+

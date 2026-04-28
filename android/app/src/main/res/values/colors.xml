@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="widget_bg_color">#F5F5F5</color>
+    <color name="widget_card_bg">#FFFFFF</color>
+    <color name="widget_text_primary">#1A1A1A</color>
+    <color name="widget_text_secondary">#757575</color>
+    
+    <!-- Fuel Colors based on app theme -->
+    <color name="widget_benzin">#FF9800</color>
+    <color name="widget_motorin">#1976D2</color>
+    <color name="widget_lpg">#9C27B0</color>
+
+    <color name="widget_arrow_up">#E53935</color>
+    <color name="widget_arrow_down">#43A047</color>
+    <color name="widget_arrow_neutral">#B0BEC5</color>
+</resources>

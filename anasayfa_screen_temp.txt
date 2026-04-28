@@ -1,0 +1,116 @@
+                  final t = e.key.toLowerCase();
+                  if ((t.contains('95') || t.contains('kurşunsuz')) && benzinAvg == null) {
+                    benzinAvg = e.value;
+                  } else if (t.contains('motorin') && !t.contains('premium') && motorinAvg == null) {
+                    motorinAvg = e.value;
+                  } else if ((t.contains('lpg') || t.contains('otogaz')) && lpgAvg == null) {
+                    lpgAvg = e.value;
+                  }
+                }
+                if (benzinAvg != null && motorinAvg != null && lpgAvg != null) {
+                  final favoriIlKodu = ref.read(varsayilanIlProvider) ?? '06';
+                  final favoriIlAdi = IlKodlari.getIlAdi(favoriIlKodu);
+
+                  Future.microtask(() async {
+                    try {
+                      final repo = ref.read(fiyatRepositoryProvider);
+                      final markalarDs = ref.read(markaFiyatDatasourceProvider);
+                      
+                      // 1. Ozetleri Al
+                      final istOzet = await repo.getIlOzet('34', 'İstanbul');
+                      final ankOzet = await repo.getIlOzet('06', 'Ankara');
+                      final izmOzet = await repo.getIlOzet('35', 'İzmir');
+
+                      final tableData = <Map<String, dynamic>>[];
+
+                      // Top Row (Türkiye) handled via saving il_adi when processing tableData
+                      // Optional: Include "Türkiye Ortalaması" inside the table
+                      
+                      // Şehirler Header
+                      tableData.add({'is_header': true, 'name': 'Popüler Şehirler'});
+
+                      void addCity(String name, IlFiyatOzet ozet) {
+                        tableData.add({
+                          'is_header': false,
+                          'name': name,
+                          'benzin': ozet.benzin95 > 0 ? ozet.benzin95.toStringAsFixed(2) : '-',
+                          'motorin': ozet.motorin > 0 ? ozet.motorin.toStringAsFixed(2) : '-',
+                          'lpg': (ozet.lpg != null && ozet.lpg! > 0) ? ozet.lpg!.toStringAsFixed(2) : '-',
+                        });
+                      }
+
+                      addCity('İstanbul', istOzet);
+                      addCity('Ankara', ankOzet);
+                      addCity('İzmir', izmOzet);
+
+                      // Eğer favori büyük şehirlerden değilse onu da ekle
+                      if (!['34', '06', '35'].contains(favoriIlKodu)) {
+                        final fOzet = await repo.getIlOzet(favoriIlKodu, favoriIlAdi);
+                        addCity(favoriIlAdi, fOzet);
+                      }
+
+                      // En büyük / popüler istasyonları sınırla
+                      final markalar = await markalarDs.getMarkaFiyatlari(favoriIlAdi);
+                      
+                      final bigBrandKeywords = ['opet', 'shell', 'bp', 'petrol ofisi', 'aytemiz', 'total'];
+                      final bigBrands = markalar.where((m) {
+                        final nameLow = m.firma.toLowerCase();
+                        return bigBrandKeywords.any((k) => nameLow.contains(k));
+                      }).toList();
+
+                      MarkaFiyat? minB, maxB, minM, maxM, minL, maxL;
+                      for (var m in bigBrands) {
+                        if (m.benzin != null && m.benzin! > 0) {
+                          if (minB == null || m.benzin! < minB.benzin!) minB = m;
+                          if (maxB == null || m.benzin! > maxB.benzin!) maxB = m;
+                        }
+                        if (m.motorin != null && m.motorin! > 0) {
+                          if (minM == null || m.motorin! < minM.motorin!) minM = m;
+                          if (maxM == null || m.motorin! > maxM.motorin!) maxM = m;
+                        }
+                        if (m.lpg != null && m.lpg! > 0) {
+                          if (minL == null || m.lpg! < minL.lpg!) minL = m;
+                          if (maxL == null || m.lpg! > maxL.lpg!) maxL = m;
+                        }
+                      }
+
+                      String formatCell(MarkaFiyat? mf, double? fiyat) {
+                        if (mf == null || fiyat == null || fiyat <= 0) return '-';
+                        String name = mf.firma;
+                        if (name.toLowerCase().contains('petrol ofisi')) name = 'PO';
+                        if (name.toLowerCase().contains('total')) name = 'Total';
+                        if (name.toLowerCase().contains('aytemiz')) name = 'Aytemiz';
+                        if (name.toLowerCase().contains('shell')) name = 'Shell';
+                        if (name.toLowerCase().contains('opet')) name = 'Opet';
+                        if (name.toLowerCase() == 'bp') name = 'BP';
+                        return '${fiyat.toStringAsFixed(2)}\n($name)';
+                      }
+
+                      // Markalar Header - En Ucuz / En Pahalı
+                      tableData.add({'is_header': true, 'name': 'Piyasa ($favoriIlAdi)'});
+                      
+                      tableData.add({
+                        'is_header': false,
+                        'name': '🟢 En Ucuz',
+                        'benzin': formatCell(minB, minB?.benzin),
+                        'motorin': formatCell(minM, minM?.motorin),
+                        'lpg': formatCell(minL, minL?.lpg),
+                      });
+                      
+                      tableData.add({
+                        'is_header': false,
+                        'name': '🔴 En Pahalı',
+                        'benzin': formatCell(maxB, maxB?.benzin),
+                        'motorin': formatCell(maxM, maxM?.motorin),
+                        'lpg': formatCell(maxL, maxL?.lpg),
+                      });
+
+                      // Widget'a gönder
+                      await WidgetUpdater.guncelle(tableData: tableData);
+                    } catch (e) {
+                      debugPrint('Widget Error: $e');
+                    }
+                  });
+                }
+
+                return Padding(

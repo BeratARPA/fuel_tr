@@ -1,0 +1,6 @@
+  } catch (e) {
+    if (kDebugMode) print('[WorkManager] Haber kontrol hata: $e');
+  }
+}
+
+// ─── Main ──────────────────────────────────────────────────

@@ -1,0 +1,22 @@
+{
+  "benzin95": {
+    "otv_tl_litre": 7.52,
+    "kdv_oran": 20,
+    "dagitici_marj_tl": 0.4,
+    "bayi_marj_tl": 0.35
+  },
+  "motorin": {
+    "otv_tl_litre": 5.35,
+    "kdv_oran": 20,
+    "dagitici_marj_tl": 0.35,
+    "bayi_marj_tl": 0.3
+  },
+  "lpg": {
+    "otv_tl_litre": 1.01,
+    "kdv_oran": 20,
+    "dagitici_marj_tl": 0.25,
+    "bayi_marj_tl": 0.2
+  },
+  "guncelleme": "2026-03-01",
+  "kaynak": "EPDK Petrol Piyasasi Fiyatlandirma Raporu"
+}

@@ -1,0 +1,84 @@
+name: fuel_tr
+description: "Turkiye akaryakit fiyat takip uygulamasi - EPDK resmi verileri"
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.11.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State Management
+  flutter_riverpod: ^2.6.1
+  riverpod_annotation: ^2.3.5
+
+  # Network
+  http: ^1.2.2
+  xml: ^6.5.0
+
+  # Local Storage
+  shared_preferences: ^2.3.2
+
+  # Local Notifications
+  flutter_local_notifications: ^18.0.0
+
+  # Background Tasks
+  workmanager: ^0.6.0
+
+  # Navigation
+  go_router: ^14.2.7
+
+  # Charts
+  fl_chart: ^0.69.0
+
+  # URL Launcher
+  url_launcher: ^6.3.0
+
+  # Shimmer Loading
+  shimmer: ^3.0.0
+
+  # Connectivity
+  connectivity_plus: ^6.0.5
+
+  # Intl
+  intl: ^0.20.2
+  flutter_map: ^8.2.2
+  latlong2: ^0.9.1
+  share_plus: ^12.0.1
+  geolocator: ^14.0.2
+  home_widget: ^0.7.0
+  flutter_localizations:
+    sdk: flutter
+  google_mobile_ads: ^7.0.0
+  flutter_html: ^3.0.0
+  html_unescape: ^2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  riverpod_generator: ^2.4.3
+  build_runner: ^2.4.12
+  flutter_lints: ^6.0.0
+  mocktail: ^1.0.4
+  flutter_launcher_icons: ^0.14.3
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  web:  
+    generate: true
+  windows:
+    generate: true
+  macos:
+    generate: true
+  image_path: "assets/icon.png"
+  min_sdk_android: 21
+  remove_alpha_ios: true
+
+flutter:
+  uses-material-design: true
+  generate: true
+  assets:
+    - assets/data/
